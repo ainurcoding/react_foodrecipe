@@ -112,11 +112,14 @@ const Landing = () => {
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const [data, setData] = useState({});
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         const data = localStorage.getItem("data");
+        // validasi
         if(!token){
-            
+            alert("silahkan login terlebih dahulu")
+            return navigate("/")
         }
         if(data){
             setData(data);

@@ -1,22 +1,46 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import gStyle from '../../Assets/css/general.module.css';
 import iconActive from '../../Assets/img/user icon activ.png';
 import navStyle from '../../Assets/css/navbar.module.css';
 import footStyle from '../../Assets/css/footer.module.css';
 
 const Navbar = () => {
+    // inline style
     const styles = {
         height: "100px"
     }
     const zIndex = {
         zIndex: "999"
     }
+    // inline style
+
+    const navigate = useNavigate();
+
+    const [data, setData] = useState({});
+    const [isActive, setIsActive] = useState(false);
+    const [userName, setName] = useState()
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        const data = localStorage.getItem("data");
-    }, [])
+        const data = localStorage.getItem(`data`);
+        const getName = localStorage.getItem("username");
+        // console.log(getName)
+        if(data){
+            
+            console.log(data)
+            setData(data);
+            setIsActive(true);
+            setName(getName);
+            
+        }
+    }, []);
+    
+
+    const onLogout = (e) => {
+        e.preventDefault();
+        localStorage.clear();
+        return navigate('/');
+    }
 
     
 
@@ -43,7 +67,24 @@ const Navbar = () => {
                     <div className='col-2'>
                         <div className={`w-100 d-flex align-items-center`} style={styles}>
                             <img src={iconActive} alt="login icon" />
-                            <p className={` ${gStyle['airbnb-lt']} ${gStyle['txt-color-blue']} p-3`}><Link className={`${navStyle['resp-text']} ${gStyle['airbnb-bd']} ${gStyle['txt-color-blue']}  text-decoration-none h6`} to='/'>Login</Link></p>
+                            <p className={` ${gStyle['airbnb-md']} ${gStyle['txt-color-blue']} p-3`}>
+                                {isActive ? 
+                                    userName.replace(/"/g,``)
+                                    
+                                    : 
+                                    <Link className={`${navStyle['resp-text']} ${gStyle['airbnb-bd']} ${gStyle['txt-color-blue']}  text-decoration-none h6`} to='/'></Link> 
+                                }
+                                
+                            </p>
+                            {isActive ?
+                                    <button 
+                                    className={`${gStyle['airbnb-lt']} ${gStyle['bg-color-yellow']} ${gStyle['buttonReset']} `} 
+                                    onClick={(e) => onLogout(e)}
+                                    >logout
+                                    </button>
+                                    :
+                                    ''
+                            }
                         </div>
                     </div>
                 </div>

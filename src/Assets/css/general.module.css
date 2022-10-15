@@ -31,6 +31,12 @@
     
 }
 
+.buttonReset {
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
 input[type="password"]::placeholder {

@@ -30,6 +30,7 @@ const Login = () => {
                 // console.log(res.data);
                 localStorage.setItem("token", res.data.data.token);
                 localStorage.setItem("data", JSON.stringify(res.data.data.data));
+                localStorage.setItem("username", JSON.stringify(res.data.data.data.name));
                 alert("login sukses");
                 return (
                     navigate("/landing")
@@ -59,7 +60,7 @@ const Login = () => {
                                  <div className={`${authStyle['wrapper-ch']} `}>
                                     <hr />
                                  </div>
-                                 <form className='w-50' onSubmit={(e) => onSubmitHandler(e)}>
+                                 <form className='w-100' onSubmit={(e) => onSubmitHandler(e)}>
                                  <div className={`${authStyle['wrapper-ch']} `}>
                                     
                                         <div className="d-flex flex-column gap-2 mb-3">
@@ -120,7 +121,7 @@ const Login = () => {
                                  </div>
                                  <div className={`${authStyle['wrapper-ch']} gap-1 d-flex justify-content-center align-items-center`}>
                                             <p className={`${gStyle['airbnb-lt']}`}>Don't have an account ?</p>
-                                            <p><Link className={`text-decoration-none ${gStyle['txt-color-yellow']}`} to='/auth/register'>Sign-up</Link></p>
+                                            <p><Link className={`text-decoration-none ${gStyle['txt-color-yellow']}`} to='/register'>Sign-up</Link></p>
                                  </div>
                                  
                             </div>
