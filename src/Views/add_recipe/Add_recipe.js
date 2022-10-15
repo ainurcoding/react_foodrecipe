@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Footer, SpaceEmpty } from '../../Component/main/Main';
+import { Navbar, Footer, SpaceEmpty } from '../../Components/main/Main';
 import gStyle from '../../Assets/css/general.module.css';
 
 import './style.css';

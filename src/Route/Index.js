@@ -5,7 +5,7 @@ import Login from '../Views/login/Login';
 import Home from '../Views/landing/Landing';
 import Add_recipe from '../Views/add_recipe/Add_recipe';
 import Profile from '../Views/profile/Profile';
-import ScrollToTop from '../Component/ScrollToTop';
+import ScrollToTop from '../Components/ScrollToTop';
 
 
 const Router = () => {

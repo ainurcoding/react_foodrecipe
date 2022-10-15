@@ -110,3 +110,10 @@
     border: none;
     border-radius: 5px;
 }
+
+.btn-customize-nav {
+    outline : none;
+    border: none;
+    border-radius: 5px;
+    background: none
+}

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import gStyle from '../../Assets/css/general.module.css';
 import iconActive from '../../Assets/img/user icon activ.png';
@@ -12,6 +12,11 @@ const Navbar = () => {
     const zIndex = {
         zIndex: "999"
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const data = localStorage.getItem("data");
+    }, [])
 
     
 

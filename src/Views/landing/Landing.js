@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import iconActive from '../../Assets/img/user icon activ.png';
-import { Navbar, Footer, SpaceEmpty } from '../../Component/main/Main';
+import { Navbar, Footer, SpaceEmpty } from '../../Components/main/Main';
 import gStyle from '../../Assets/css/general.module.css';
 import lpStyle from '../../Assets/css/lp.module.css';
 import banner2 from '../../Assets/img/banner2.png';
@@ -12,6 +12,7 @@ import chickenKare from '../../Assets/img/card1.png';
 
 
 const Landing = () => {
+    // inline style
     const styles = {
         height: "1210px"
     }
@@ -103,6 +104,26 @@ const Landing = () => {
         width: "max-content",
         height: "max-content"
     }
+    // inline style
+
+    const navigate = useNavigate();
+    const [title, setTitle] = useState("");
+    const [recipe, setRecipe] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
+    const [data, setData] = useState({});
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const data = localStorage.getItem("data");
+        if(!token){
+            
+        }
+        if(data){
+            setData(data);
+        }
+    }, []);
+
+    
     return (
         <Fragment>
             <Navbar />

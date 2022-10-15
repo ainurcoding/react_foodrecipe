@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Footer, SpaceEmpty } from '../../Component/main/Main';
+import { Navbar, Footer, SpaceEmpty } from '../../Components/main/Main';
+import { MyRecipe, LikedRecipe, SavedRecipe } from '../../Components/profile/cardSect2';
 import gStyle from '../../Assets/css/general.module.css';
 import profileImg from '../../Assets/img/profile-img.png';
 import bombChicken from '../../Assets/img/bomb-chicken.png';
@@ -8,6 +9,32 @@ import "./style.css";
 
 
 const Profile = () => {
+    const [showMyRecipe, setShowMyRecipe] = useState(true);
+    
+    const [showSavedRecipe, setShowSavedRecipe] = useState(false);
+    
+    const [showLikedRecipe, setShowLikedRecipe] = useState(false);
+
+    const onMyRecipe = () => { 
+        setShowMyRecipe(true);
+        setShowSavedRecipe(false);
+        setShowLikedRecipe(false);
+    }
+
+    const onSavedRecipe = () => { 
+        setShowSavedRecipe(true);
+        setShowMyRecipe(false);
+        setShowLikedRecipe(false);
+    }
+
+    const onLikedRecipe = () => { 
+        setShowLikedRecipe(true);
+        setShowMyRecipe(false);
+        setShowSavedRecipe(false);
+        
+    }
+
+
     const sect1 = {
         height: "400px"
     }
@@ -17,14 +44,14 @@ const Profile = () => {
         // height: "172px",
         width: "100%",
         height: "100%",
-        
+
     }
 
     const buttonSize = {
         width: "100%",
-        width: "100px",
+        width: "100%",
         cursor: "pointer",
-        backgroundColor: "#00000068"
+        borderRadius: "5px",
     }
 
     const line = {
@@ -32,9 +59,9 @@ const Profile = () => {
         borderBottom: "3px #0000009c solid"
     }
 
-    const buttonBootstrapReset = {
-        backgroundColor: "none"
-    }
+    
+
+
 
     return (
         <Fragment>
@@ -48,23 +75,31 @@ const Profile = () => {
                     <div className={`borderRadius`}>
                         <img src={profileImg} alt="" style={pProfileSize} />
                     </div>
+
                     <div className={`${gStyle['w-30']}  text-end mb-2`}>
-                        <button className={`${gStyle['bg-color-yellow']} btn-customize`}>
-                            <i className="w-100 bi bi-pencil"></i>
+                        <button 
+                            className={`${gStyle['bg-color-yellow']} btn-customize`}
+                            data-bs-toggle="collapse" 
+                            href="#collapseExample"
+                            aria-expanded="false" 
+                            aria-controls="collapseExample">   
+                                <i className="w-100 bi bi-pencil"></i>
                         </button>
                     </div>
                     {/* collapse */}
-                        <div id="example-collapse-form ">
-                            <div className=" mb-2" style={buttonSize}>
-                                <input type="file" id="files" className="hidden" />
-                                <label for="files" className="airbnb-md" style={buttonSize}>
-                                    Change Photo Profile
-                                </label>
-                            </div>
-                            <div className=" mb-2" style={buttonSize}>
-                                <Link className='text-decoration-none text-dark' to="/user/change_password"><p className={`${gStyle['airbnb-md']}`}>Change Password</p></Link>
-                            </div>
+                    <div 
+                        id="collapseExample"
+                        className='collapse'>
+                        <div className=" mb-2" style={buttonSize}>
+                            <input type="file" id="files" className="hidden" />
+                            <label for="files" className={`airbnb-md ${gStyle['bg-color-yellow']} ${gStyle['airbnb-md']}`} style={buttonSize} >
+                                Change Photo Profile
+                            </label>
                         </div>
+                        <div className={`mb-2 ${gStyle['bg-color-yellow']}`}style={buttonSize}>
+                            <Link className='text-decoration-none text-dark'  to="/user/change_password"><p className={`${gStyle['airbnb-md']} `}>Change Password</p></Link>
+                        </div>
+                    </div>
                     {/* collapse */}
 
                     <div className={`  text-center `}>
@@ -81,6 +116,52 @@ const Profile = () => {
                 </div>
             </div>
             {/* end of sect1 */}
+
+            {/* sect2 */}
+            <div className='mb-3 w-100'>
+                <ul className={`d-flex flex-row list-unstyled gap-5 ms-3 ${gStyle['airbnb-bd']} h3`}>
+                    <button 
+                        className='btn-customize-nav'
+                        onClick={onMyRecipe}
+                        style={showMyRecipe ? {borderBottom: "3px solid black",background :"none"} : {}}>
+                            MyRecipe
+                    </button>
+                    <button 
+                        className='btn-customize-nav'
+                        onClick={onSavedRecipe}
+                        style={showSavedRecipe ? {borderBottom: "3px solid black",background :"none"} : {}}
+                        >
+                            Saved Recipe
+                    </button>
+                    <button 
+                        className='btn-customize-nav' 
+                        onClick={onLikedRecipe}
+                        style={showLikedRecipe ? {borderBottom: "3px solid black",background :"none"} : {}}
+                        >
+                            Liked Recipe
+                    </button>
+                </ul>
+            </div>
+            <hr />
+            {/* My Recipe */}
+            { showMyRecipe ? <MyRecipe/> : null}
+            {/* end of My Recipe */}
+
+            {/* Saved Recipe */}
+            { showSavedRecipe ? <SavedRecipe/> : null}
+            
+            {/* end of Saved Recipe */}
+            
+            {/* Liked Recipe */}
+            { showLikedRecipe ? <LikedRecipe/> : null}
+            {/* end of Liked Recipe */}
+            
+            {/* end of sect2 */}
+
+
+            {/* footer */}
+            <Footer />
+            {/* footer */}
 
         </Fragment>
     )

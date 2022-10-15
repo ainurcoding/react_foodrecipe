@@ -2,8 +2,9 @@ import React, { Fragment, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authStyle from '../../Assets/css/auth.module.css';
 import gStyle from '../../Assets/css/general.module.css';
-import { Navbar, Footer, SpaceEmpty } from '../../Component/main/Main';
-import BannerAuth from '../../Component/BannerAuth';
+import { Navbar, Footer, SpaceEmpty } from '../../Components/main/Main';
+import BannerAuth from '../../Components/BannerAuth';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -15,7 +16,26 @@ const Login = () => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(form)
+        console.log(form.password)
+        if(form.email === '' || form.password === '') {
+            alert("Mohon inputkan email dan password Anda")
+        } else {
+            const body = {
+                email: form.email,
+                password: form.password,
+            };
+            axios
+            .post(`${process.env.REACT_APP_BACKEND_URL}/login`, body)
+            .then((res) => {
+                // console.log(res.data);
+                localStorage.setItem("token", res.data.data.token);
+                localStorage.setItem("data", JSON.stringify(res.data.data.data));
+                alert("login sukses");
+                return (
+                    navigate("/landing")
+                )
+            })
+        }
     }
     return (
         <Fragment>
